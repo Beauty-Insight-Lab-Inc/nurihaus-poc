@@ -10,8 +10,11 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. API URL 설정 (로컬 백엔드 주소)
-API_URL = "http://127.0.0.1:8000"
+# 2. API URL 설정 (Secrets 우선 사용, 없으면 로컬)
+if "API_URL" in st.secrets:
+    API_URL = st.secrets["API_URL"]
+else:
+    API_URL = "http://127.0.0.1:8000"
 
 # 3. 헤더 섹션
 st.title("💄 Nurihaus Creator-Campaign AI Matching")
