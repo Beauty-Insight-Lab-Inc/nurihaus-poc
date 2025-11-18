@@ -8,14 +8,27 @@ import os
 app = FastAPI(title="Nurihaus PoC AI API", description="Creator Matching & ROI Prediction")
 
 # 2. 학습된 모델 로드 (서버 시작 시 한 번만 로드)
-# 주의: train.py에서 저장한 경로와 일치해야 함
-MODEL_PATH = os.path.join("2_recommendation_model", "saved_models", "roi_predictor.joblib")
+# 스크립트의 현재 위치를 기준으로 모델 파일의 절대 경로를 계산합니다.
+# 이렇게 하면 어떤 위치에서 서버를 실행하더라도 항상 정확한 경로를 찾을 수 있습니다.
+try:
+    # 현재 파일(main.py)의 절대 경로
+    current_file_path = os.path.abspath(__file__)
+    # 현재 파일이 속한 디렉토리 (3_backend_api_fastapi)
+    current_dir = os.path.dirname(current_file_path)
+    # 프로젝트 루트 디렉토리 (current_dir의 상위 폴더)
+    project_root = os.path.dirname(current_dir)
+    # 프로젝트 루트에서부터 모델 파일까지의 전체 경로 조합
+    MODEL_PATH = os.path.join(project_root, "2_recommendation_model", "saved_models", "roi_predictor.joblib")
+    
+    # 경로가 실제로 존재하는지 확인
+    if not os.path.exists(MODEL_PATH):
+        raise FileNotFoundError(f"Model file not found at the calculated path: {MODEL_PATH}")
 
-if os.path.exists(MODEL_PATH):
     model = joblib.load(MODEL_PATH)
     print(f">>> Model loaded successfully from {MODEL_PATH}")
-else:
-    print(f">>> Error: Model not found at {MODEL_PATH}. Please run train.py first.")
+
+except Exception as e:
+    print(f">>> FATAL: Failed to load model. Error: {e}")
     model = None
 
 # 3. 요청 데이터 구조 정의 (Pydantic)
