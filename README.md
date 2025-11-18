@@ -5,7 +5,7 @@
 ## 📌 Project Overview
 Nurihaus(NuriLounge)의 8만+ 크리에이터 매칭 프로세스를 자동화하고, 캠페인 ROI를 예측하기 위해 개발된 AI 솔루션 PoC입니다.
 
-* **Live Demo:** [Click Here to View App]([https://nurihaus-poc-2025.streamlit.app/])
+* **Live Demo:** [Click Here to View App](https://nurihaus-poc-2025.streamlit.app/)
 * **Tech Stack:** Python, FastAPI, Streamlit, PostgreSQL, Scikit-learn, Render
 
 ## 🚀 Key Features
