@@ -1,4 +1,4 @@
-# 💄 Nurihaus AI PoC: Creator-Campaign Matching Engine
+# 💄 AI Creator Matching Engine (Prototype): Creator-Campaign Matching Engine
 
 **"Data-Driven Influencer Marketing Solution for Nurihaus"**
 
